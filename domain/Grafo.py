@@ -55,7 +55,7 @@ class Grafo:
         return self.__Grafo.has_node(v1)
 
     def mostra_grafo(self):
-        pos = nx.spring_layout(self.__Grafo)  # layout para melhor visualização
+        pos = nx.spring_layout(self.__Grafo)
         labels = nx.get_edge_attributes(self.__Grafo, 'weight')
         nx.draw(self.__Grafo, pos, with_labels=True)
         nx.draw_networkx_edge_labels(self.__Grafo, pos, edge_labels=labels)
