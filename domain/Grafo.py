@@ -1,84 +1,46 @@
-class Vertice:
-  def __init__(self, rotulo):
-    self.rotulo = rotulo
-    self.adjacentes = []
-
-  def adiciona_adjacente(self, adjacente):
-    self.adjacentes.append(adjacente)
-
-  def mostra_adjacentes(self):
-    for i in self.adjacentes:
-      print(i.vertice.rotulo, i.custo)
-
-class Adjacente:
-  def __init__(self, vertice, custo):
-    self.vertice = vertice
-    self.custo = custo
+import networkx as nx
+import matplotlib.pyplot as plt
 
 class Grafo:
-  arad = Vertice('Arad')
-  zerind = Vertice('Zerind')
-  oradea = Vertice('Oradea')
-  sibiu = Vertice('Sibiu')
-  timisoara = Vertice('Timisoara')
-  lugoj = Vertice('Lugoj')
-  mehadia = Vertice('Mehadia')
-  dobreta = Vertice('Dobreta')
-  craiova = Vertice('Craiova')
-  rimnicu = Vertice('Rimnicu')
-  fagaras = Vertice('Fagaras')
-  pitesti = Vertice('Pitesti')
-  bucharest = Vertice('Bucharest')
-  giurgiu = Vertice('Giurgiu')
+    def __init__(self, arestas):
+        self.__Grafo = nx.Graph()
 
-  arad.adiciona_adjacente(Adjacente(zerind, 75))
-  arad.adiciona_adjacente(Adjacente(sibiu, 140))
-  arad.adiciona_adjacente(Adjacente(timisoara, 118))
+        for aresta in arestas:
+            v1, v2, custo = aresta
+            self.__Grafo.add_edge(v1, v2, weight=custo)
 
-  zerind.adiciona_adjacente(Adjacente(arad, 75))
-  zerind.adiciona_adjacente(Adjacente(oradea, 71))
+    def adiciona_aresta(self, v1, v2, custo):
+        if not self.aresta_existe(v1, v2):
+            self.__Grafo.add_edge(v1, v2, weight=custo)
+        else:
+            raise ValueError("A aresta já existe.")
 
-  oradea.adiciona_adjacente(Adjacente(zerind, 71))
-  oradea.adiciona_adjacente(Adjacente(sibiu, 151))
+    def remove_aresta(self, v1, v2):
+        if self.aresta_existe(v1, v2):
+            self.__Grafo.remove_edge(v1, v2)
+            return True
+        else:
+            raise KeyError("Aresta não existe.")
+            return False
 
-  sibiu.adiciona_adjacente(Adjacente(oradea, 151))
-  sibiu.adiciona_adjacente(Adjacente(arad, 140))
-  sibiu.adiciona_adjacente(Adjacente(fagaras, 99))
-  sibiu.adiciona_adjacente(Adjacente(rimnicu, 80))
+    def adiciona_vertice(self, rotulo_vertice):
+        if not self.vertice_existe(rotulo_vertice):
+            self.__Grafo.add_node(rotulo_vertice)
+        else:
+            raise ValueError("O vertice já existe.")
 
-  timisoara.adiciona_adjacente(Adjacente(arad, 118))
-  timisoara.adiciona_adjacente(Adjacente(lugoj, 111))
+    def remove_vertice(self, rotulo_vertice):
+        self.__Grafo.remove_node(rotulo_vertice)
 
-  lugoj.adiciona_adjacente(Adjacente(timisoara, 111))
-  lugoj.adiciona_adjacente(Adjacente(mehadia, 70))
+    def aresta_existe(self,v1,v2):
+        return self.__Grafo.has_edge(v1, v2)
 
-  mehadia.adiciona_adjacente(Adjacente(lugoj, 70))
-  mehadia.adiciona_adjacente(Adjacente(dobreta, 75))
+    def vertice_existe(self,v1):
+        return self.__Grafo.has_node(v1)
 
-  dobreta.adiciona_adjacente(Adjacente(mehadia, 75))
-  dobreta.adiciona_adjacente(Adjacente(craiova, 120))
-
-  craiova.adiciona_adjacente(Adjacente(dobreta, 120))
-  craiova.adiciona_adjacente(Adjacente(pitesti, 138))
-  craiova.adiciona_adjacente(Adjacente(rimnicu, 146))
-
-  rimnicu.adiciona_adjacente(Adjacente(craiova, 146))
-  rimnicu.adiciona_adjacente(Adjacente(sibiu, 80))
-  rimnicu.adiciona_adjacente(Adjacente(pitesti, 97))
-
-  fagaras.adiciona_adjacente(Adjacente(sibiu, 99))
-  fagaras.adiciona_adjacente(Adjacente(bucharest, 211))
-
-  pitesti.adiciona_adjacente(Adjacente(rimnicu, 97))
-  pitesti.adiciona_adjacente(Adjacente(craiova, 138))
-  pitesti.adiciona_adjacente(Adjacente(bucharest, 101))
-
-  bucharest.adiciona_adjacente(Adjacente(fagaras, 211))
-  bucharest.adiciona_adjacente(Adjacente(pitesti, 101))
-  bucharest.adiciona_adjacente(Adjacente(giurgiu, 90))
-
-grafo = Grafo()
-
-grafo.arad.mostra_adjacentes()
-
-grafo.bucharest.mostra_adjacentes()
+    def mostra_grafo(self):
+        pos = nx.spring_layout(self.__Grafo)  # layout para melhor visualização
+        labels = nx.get_edge_attributes(self.__Grafo, 'weight')
+        nx.draw(self.__Grafo, pos, with_labels=True)
+        nx.draw_networkx_edge_labels(self.__Grafo, pos, edge_labels=labels)
+        plt.show()
