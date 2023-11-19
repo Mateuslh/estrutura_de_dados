@@ -9,6 +9,22 @@ class Grafo:
             v1, v2, custo = aresta
             self.__Grafo.add_edge(v1, v2, weight=custo)
 
+    @property
+    def vertices(self):
+        return list(self.__Grafo.nodes)
+
+    def busca_vertices_adjacentes(self, vertice):
+        if self.vertice_existe(vertice):
+            return list(self.__Grafo.neighbors(vertice))
+        else:
+            raise ValueError("Vértice não existe.")
+
+    def peso_aresta(self, v1, v2):
+        if self.aresta_existe(v1, v2):
+            return self.__Grafo[v1][v2]['weight']
+        else:
+            raise ValueError("Aresta não existe.")
+
     def adiciona_aresta(self, v1, v2, custo):
         if not self.aresta_existe(v1, v2):
             self.__Grafo.add_edge(v1, v2, weight=custo)
