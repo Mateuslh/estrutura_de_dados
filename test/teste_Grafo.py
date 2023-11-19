@@ -11,19 +11,20 @@ class TestGrafo(unittest.TestCase):
 
     def test_adiciona_aresta(self):
         self.grafo.adiciona_aresta('Sibiu', 'Fagaras', 99)
-        self.assertTrue(self.grafo.__Grafo.has_edge('Sibiu', 'Fagaras'))
+        self.assertTrue(self.grafo.aresta_existe('Sibiu', 'Fagaras'))
 
     def test_remove_aresta(self):
+        self.grafo.mostra_grafo()
         self.assertTrue(self.grafo.remove_aresta('Sibiu', 'Arad'))
-        self.assertFalse(self.grafo.__Grafo.has_edge('Sibiu', 'Arad'))
+        self.assertFalse(self.grafo.aresta_existe('Sibiu', 'Arad'))
 
     def test_adiciona_vertice(self):
         self.grafo.adiciona_vertice('NewCity')
-        self.assertTrue(self.grafo.__Grafo.has_node('NewCity'))
+        self.assertTrue(self.grafo.aresta_existe('NewCity'))
 
     def test_remove_vertice(self):
         self.grafo.remove_vertice('Sibiu')
-        self.assertFalse(self.grafo.__Grafo.has_node('Sibiu'))
+        self.assertFalse(self.grafo.aresta_existe('Sibiu'))
 
 if __name__ == '__main__':
     unittest.main()
