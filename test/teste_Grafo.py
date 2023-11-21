@@ -8,7 +8,7 @@ class TestGrafo(unittest.TestCase):
             ('Arad', 'Timisoara', 118),
         ]
         self.grafo = Grafo(self.arestas_exemplo)
-
+        self.grafo.mostra_grafo()
     def test_adiciona_aresta(self):
         self.grafo.adiciona_aresta('Sibiu', 'Fagaras', 99)
         self.assertTrue(self.grafo.aresta_existe('Sibiu', 'Fagaras'))

@@ -13,6 +13,9 @@ class Grafo:
     def vertices(self):
         return list(self.__Grafo.nodes)
 
+    @property
+    def arestas(self):
+        return list(self.__Grafo.edges)
     def busca_vertices_adjacentes(self, vertice):
         if self.vertice_existe(vertice):
             return list(self.__Grafo.neighbors(vertice))
@@ -37,7 +40,6 @@ class Grafo:
             return True
         else:
             raise KeyError("Aresta não existe.")
-            return False
 
     def adiciona_vertice(self, rotulo_vertice):
         if not self.vertice_existe(rotulo_vertice):

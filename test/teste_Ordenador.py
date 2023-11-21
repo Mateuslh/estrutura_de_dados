@@ -2,9 +2,7 @@ import os
 import unittest
 import random
 import string
-from os import environ
 from dotenv import load_dotenv
-
 from domain.Ordenador import Ordenador
 
 load_dotenv()
