@@ -1,14 +1,17 @@
 import unittest
-from domain.Grafo import Grafo
+from domain.desenha_grafo import DesenhaGrafo
+
 class TestGrafo(unittest.TestCase):
+    
     def setUp(self):
         self.arestas_exemplo = [
             ('Arad', 'Zerind', 75),
             ('Arad', 'Sibiu', 140),
             ('Arad', 'Timisoara', 118),
         ]
-        self.grafo = Grafo(self.arestas_exemplo)
+        self.grafo = DesenhaGrafo()
         self.grafo.mostra_grafo()
+    
     def test_adiciona_aresta(self):
         self.grafo.adiciona_aresta('Sibiu', 'Fagaras', 99)
         self.assertTrue(self.grafo.aresta_existe('Sibiu', 'Fagaras'))

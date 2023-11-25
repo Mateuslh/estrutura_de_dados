@@ -3,9 +3,10 @@ import unittest
 import random
 import string
 from dotenv import load_dotenv
-from domain.Ordenador import Ordenador
+from domain.ordenador import Ordenador
 
 load_dotenv()
+
 class TestOrdenador(unittest.TestCase):
 
     def setUp(self):
