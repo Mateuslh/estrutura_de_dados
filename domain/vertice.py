@@ -18,15 +18,37 @@ class Vertice:
     def rotulo(self, rotulo):
         self.__rotulo = rotulo
 
-    def adicionar_adjacente(self, vertice, custo):
-        self.adjacentes.append(Adjacente(vertice, custo))
-
-    def retornar_adjacente(self, vertice):
-        for adjacente in self.adjacentes:
+    def adjacente_existe(self, vertice):
+        for adjacente in self.__adjacentes:
             if (adjacente.vertice == vertice):
-                return adjacente.vertice.rotulo
+                return True
+        return False
+
+    def adicionar_adjacente(self, vertice, custo):
+        if not self.adjacente_existe(vertice):
+            self.__adjacentes.append(Adjacente(vertice, custo))
+            return True
+        else:
+            return False
+        
+    def remover_adjacente(self, vertice):
+        for adjacente in self.__adjacentes:
+            if (adjacente.vertice == vertice):
+                self.__adjacentes.remove(adjacente)
+                return True
+        return False
+    
+    def buscar_adjacente(self, vertice):
+        for adjacente in self.__adjacentes:
+            if (adjacente.vertice == vertice):
+                return adjacente.vertice
+        return False
 
     def mostra_adjacentes(self):
-        for adjacente in self.adjacentes:
+        for adjacente in self.__adjacentes:
             print(f'Vertice: {adjacente.vertice.rotulo} - Custo: {adjacente.custo}')
+
+    
+    
+
 
