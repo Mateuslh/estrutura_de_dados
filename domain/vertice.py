@@ -2,21 +2,21 @@ from adjacente import Adjacente
 
 class Vertice:
 
-    def __init__(self, rotulo):
-        self.__rotulo = rotulo
+    def __init__(self, rotulo_vertice):
+        self.__rotulo_vertice = rotulo_vertice
         self.__adjacentes = []
 
     @property 
-    def rotulo(self):
-        return self.__rotulo
+    def rotulo_vertice(self):
+        return self.__rotulo_vertice
 
     @property
     def adjacentes(self):
         return self.__adjacentes
     
-    @rotulo.setter
-    def rotulo(self, rotulo):
-        self.__rotulo = rotulo
+    @rotulo_vertice.setter
+    def rotulo_vertice(self, rotulo_vertice):
+        self.__rotulo_vertice = rotulo_vertice
 
     def adjacente_existe(self, vertice):
         for adjacente in self.__adjacentes:
@@ -46,7 +46,7 @@ class Vertice:
 
     def mostra_adjacentes(self):
         for adjacente in self.__adjacentes:
-            print(f'Vertice: {adjacente.vertice.rotulo} - Custo: {adjacente.custo}')
+            print(f'Vertices Adjacentes: {adjacente.vertice.rotulo_vertice} - Custo: {adjacente.custo}')
 
     
     

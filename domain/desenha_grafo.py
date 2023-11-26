@@ -44,12 +44,6 @@ class DesenhaGrafo:
         else:
             raise ValueError("Vértice não existe.")
 
-    def peso_aresta(self, v1, v2):
-        if self.aresta_existe(v1, v2):
-            return self.__Grafo[v1][v2]['weight']
-        else:
-            raise ValueError("Aresta não existe.")
-
     def remove_vertice(self, rotulo_vertice):
         self.__Grafo.remove_node(rotulo_vertice)
 
